@@ -9,7 +9,7 @@ async function main() {
   for (let i = 17197442 ; i <= (17197442 + 100) ; i++) {
     chapters.push(i);
   }
-  let url = 'https://ntruyen.vn/truyen/thuc-tinh-hinh-xam-53034/18788993.html';
+  let url = 'https://ntruyen.vn/truyen/ta-mot-nguoi-tot-cac-nguoi-noi-ta-la-tai-hoa-47663/14343363.html';
   let nextLink = await crawl(url);
   console.log('next link: ' + nextLink);
   

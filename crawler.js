@@ -15,16 +15,17 @@ async function main() {
 async function daThienDia() {
   //https://truyenyy.vip/truyen/da-thien-dia/chuong-2.html
   let chapters = [];
-  for (let i = 2 ; i <= 308 ; i++) {
+  for (let i = 301 ; i <= 889 ; i++) {
     chapters.push(i);
   }
   for (let chapter of chapters) {
-    let url = 'https://truyenyy.vip/truyen/den-di-gioi-ta-lam-thanh-chu/chuong-'+chapter+'.html';
-    let rs = await crawl(url);
+    let nameFile = 'content_' + Math.floor(chapter/50) + '.txt';
+    let url = 'https://truyenyy.vip/truyen/huan-luyen-vien-zombies/chuong-'+chapter+'.html';
+    let rs = await crawl(url, nameFile);
   }
 }
 
-async function crawl(url) {
+async function crawl(url, nameFile) {
   // Khởi tạo trình duyệt và trang mới
   const browser = await puppeteer.launch({
     headless: "new",
@@ -55,7 +56,7 @@ async function crawl(url) {
     return string;
   });
 
-  fs.appendFile("conten.txt", imageLinks, function (err) {
+  fs.appendFile(nameFile, imageLinks, function (err) {
     if (err) {
       return console.log(err);
     }
