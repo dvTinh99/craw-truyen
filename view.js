@@ -38,7 +38,9 @@ async function autoScroll(page) {
 
 async function main() {
     let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-1/"
-    await crawl(url);
+    while (true) {
+        await crawl(url);
+    }
 }
 
 main();
