@@ -15,10 +15,22 @@ async function crawl(url) {
 
     await autoScroll(page);
 
+    const nextChap = await page.evaluate(async () => {
+        let nextChap = document.getElementsByClassName('next-chap')[3].childNodes;
+        
+        if (nextChap.length > 0) {
+            nextChap = nextChap[0].href;
+        }
+        else return null;
+
+        return nextChap;
+    });
 
 
+    
     // Đóng trình duyệt
     await browser.close();
+    return nextChap;
 }
 
 async function autoScroll(page) {
@@ -41,9 +53,15 @@ async function autoScroll(page) {
 }
 
 async function main() {
-    let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-7/"
+    let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-1/"
+    let nextChap = await crawl(url);
+    console.log('nextChap', nextChap);
+    
     while (true) {
-        await crawl(url);
+        if (!nextChap) {
+            nextChap = url;
+        }
+        nextChap = await crawl(nextChap);
     }
 }
 
