@@ -3,6 +3,10 @@ async function crawl(url) {
     // Khởi tạo trình duyệt và trang mới
     const browser = await puppeteer.launch({
         headless: "new",
+        // channel: 'chrome',
+        args: [
+            '--no-sandbox',
+        ]
     });
     const page = await browser.newPage();
 
@@ -37,7 +41,7 @@ async function autoScroll(page) {
 }
 
 async function main() {
-    let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-1/"
+    let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-7/"
     while (true) {
         await crawl(url);
     }
