@@ -13,7 +13,7 @@ async function crawl(url) {
     // Truy cập trang web chứa truyện tranh
     await page.goto(url);
 
-    await autoScroll(page);
+    // await autoScroll(page);
 
     const nextChap = await page.evaluate(async () => {
         let nextChap = document.getElementsByClassName('next-chap')[3].childNodes;
@@ -53,7 +53,7 @@ async function autoScroll(page) {
 }
 
 async function main() {
-    let url = "https://truyenhdt.com/truyen/cuoc-song-moi-o-the-gioi-khac-lieu-co-hanh-phuc/chap/9554421-chuong-1/"
+    let url = "https://truyenhdt.com/truyen/khong-biet-bang-cach-nao-dan-my-nhan-hang-s-lai-de-cap-den-toi/chap/9573592-chuong-2/"
     let nextChap = await crawl(url);
     
     while (true) {
