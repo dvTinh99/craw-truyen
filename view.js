@@ -6,9 +6,24 @@ async function crawl(url) {
         // channel: 'chrome',
         args: [
             '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process',
+            '--disable-gpu'
         ]
     });
     const page = await browser.newPage();
+
+    await page.setRequestInterception(true);
+    page.on('request', request => {
+    if (request.resourceType().toUpperCase() === 'IMAGE')
+        request.abort();
+    else
+        request.continue();
+    });
 
     // Truy cập trang web chứa truyện tranh
     await page.goto(url);
