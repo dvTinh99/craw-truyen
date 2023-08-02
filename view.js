@@ -16,7 +16,15 @@ async function crawl(url) {
     // await autoScroll(page);
 
     const nextChap = await page.evaluate(async () => {
-        let nextChap = document.getElementsByClassName('next-chap')[3].childNodes;
+        let nextChap = document.getElementsByClassName('next-chap')
+        if (!nextChap) return null;
+
+        nextChap = nextChap[3];
+
+        if (!nextChap) return null;
+
+        nextChap = nextChap.childNodes;
+
         
         if (nextChap.length > 0) {
             nextChap = nextChap[0].href;
@@ -53,7 +61,7 @@ async function autoScroll(page) {
 }
 
 async function main() {
-    let url = "https://truyenhdt.com/truyen/khong-biet-bang-cach-nao-dan-my-nhan-hang-s-lai-de-cap-den-toi/chap/9573592-chuong-2/"
+    let url = "https://truyenhdt.com/truyen/khong-biet-bang-cach-nao-dan-my-nhan-hang-s-lai-de-cap-den-toi/chap/9573592-chuong-1/"
     let nextChap = await crawl(url);
     
     while (true) {
